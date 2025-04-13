@@ -16,7 +16,7 @@ const Home = () => {
     return parts[parts.length - 1] || key;
   };
   let language: "en" | "hi" = "en";
-  
+
   try {
     const languageContext = useLanguage();
     t = languageContext.t;

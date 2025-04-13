@@ -172,7 +172,7 @@ const Packages = () => {
                     </Link>
                     <Link
                       href={`/custom-builder?packageId=${pkg.id}`}
-                      className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition-colors text-center shadow-md hover:shadow-lg"
+                      className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition-colors text-center shadow-md hover:shadow-lg block w-full"
                     >
                       {t("packages.customize")}
                     </Link>

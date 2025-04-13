@@ -72,7 +72,7 @@ const MaterialsShowcase = () => {
             {displayMaterials.length > 0 ? displayMaterials.map((material) => (
               <div
                 key={material.id}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                className="bg-white rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-200"
               >
                 {material.imageUrl ? (
                   <img
