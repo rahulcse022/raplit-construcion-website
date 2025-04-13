@@ -4,11 +4,17 @@ import { useQuery } from "@tanstack/react-query";
 import { Project } from "@shared/schema";
 import { ArrowRight } from "lucide-react";
 
+const getProjects = async (): Promise<Project[]> => {
+  const res = await fetch('/projects.json');
+  return res.json();
+};
+
 const PortfolioSection = () => {
   const { t } = useLanguage();
-  
+
   const { data: projects, isLoading } = useQuery<Project[]>({
-    queryKey: ['/api/projects']
+    queryKey: ['projects'],
+    queryFn: () => getProjects()
   });
 
   // Only show 3 projects on the homepage

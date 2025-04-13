@@ -5,12 +5,24 @@ import { useQuery } from "@tanstack/react-query";
 import { Material } from "@shared/schema";
 import { ChevronRight } from "lucide-react";
 
+const getMaterials = () => {
+  // Replace this with your actual data fetching logic from a local source (e.g., JSON file)
+  const mockMaterials = [
+    { id: 1, name: "Material 1", imageUrl: "/images/material1.jpg", category: "flooring", premium: true },
+    { id: 2, name: "Material 2", imageUrl: "/images/material2.jpg", category: "walls", premium: false },
+    { id: 3, name: "Material 3", imageUrl: "/images/material3.jpg", category: "kitchen", premium: true },
+    // Add more mock materials as needed
+  ];
+  return mockMaterials;
+};
+
 const MaterialsShowcase = () => {
   const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("all");
 
   const { data: materials, isLoading } = useQuery<Material[]>({
-    queryKey: [`/api/materials?category=${activeCategory}`]
+    queryKey: ['materials'],
+    queryFn: () => getMaterials()
   });
 
   const categories = [

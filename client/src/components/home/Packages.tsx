@@ -9,10 +9,58 @@ import { ArrowRight, Heart } from "lucide-react";
 const Packages = () => {
   const { t } = useLanguage();
   const { savedPlans, savePlan } = useSavedPlans();
-  
+
   // We only show 3 packages in the home page
+  const packagesData = [
+    {
+      id: 1,
+      name: "Package 1",
+      imageUrl: "/images/package1.jpg",
+      size: 1000,
+      bedrooms: 2,
+      bathrooms: 2,
+      description: "A great package for starting your journey.",
+      price: 2000000,
+      popular: true,
+      premium: false,
+      budget: false,
+    },
+    {
+      id: 2,
+      name: "Package 2",
+      imageUrl: "/images/package2.jpg",
+      size: 1500,
+      bedrooms: 3,
+      bathrooms: 2,
+      description: "A wonderful mid-range option.",
+      price: 3500000,
+      popular: false,
+      premium: false,
+      budget: false,
+    },
+    {
+      id: 3,
+      name: "Package 3",
+      imageUrl: "/images/package3.jpg",
+      size: 2000,
+      bedrooms: 4,
+      bathrooms: 3,
+      description: "Perfect for luxury living.",
+      price: 6000000,
+      popular: false,
+      premium: true,
+      budget: false,
+    },
+  ];
+
+
+  const getPackages = () => {
+    return packagesData;
+  };
+
   const { data: packages, isLoading } = useQuery<Package[]>({
-    queryKey: ['/api/packages'],
+    queryKey: ['packages'],
+    queryFn: () => getPackages()
   });
 
   const displayPackages = packages?.slice(0, 3) || [];
