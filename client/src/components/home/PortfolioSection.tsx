@@ -1,21 +1,51 @@
 import { Link } from "wouter";
 import { useLanguage } from "@/context/LanguageContext";
 import { useQuery } from "@tanstack/react-query";
-import { Project } from "@shared/schema";
 import { ArrowRight } from "lucide-react";
+import { dummyImage } from "@/lib/help";
 
-const getProjects = async (): Promise<Project[]> => {
-  const res = await fetch('/projects.json');
-  return res.json();
-};
+// Dummy data
+const projects = [
+  {
+    id: "1",
+    title: "Modern Web App",
+    subtitle: "React & TypeScript",
+    description:
+      "A modern web application built with React, TypeScript, and Tailwind CSS. It supports real-time collaboration features.",
+    imageUrl: dummyImage,
+    completed: true,
+  },
+  {
+    id: "2",
+    title: "E-Commerce Platform",
+    subtitle: "Next.js & Stripe",
+    description:
+      "A full-stack e-commerce site using Next.js, integrated with Stripe for payments and a CMS for product management.",
+    imageUrl: dummyImage,
+    completed: false,
+  },
+  {
+    id: "3",
+    title: "Mobile Fitness App",
+    subtitle: "React Native",
+    description:
+      "A fitness tracking app built in React Native with workout planning and social features. Connected to Firebase.",
+    imageUrl: dummyImage,
+    completed: true,
+  },
+  {
+    id: "4",
+    title: "Portfolio Website",
+    subtitle: "Personal Branding",
+    description:
+      "A sleek portfolio website for showcasing projects, blog posts, and testimonials using Gatsby and Contentful.",
+    imageUrl: dummyImage,
+    completed: true,
+  },
+];
 
 const PortfolioSection = () => {
   const { t } = useLanguage();
-
-  const { data: projects, isLoading } = useQuery<Project[]>({
-    queryKey: ['projects'],
-    queryFn: () => getProjects()
-  });
 
   // Only show 3 projects on the homepage
   const displayProjects = projects?.slice(0, 3) || [];
@@ -33,13 +63,7 @@ const PortfolioSection = () => {
         </div>
 
         {/* Portfolio Grid */}
-        {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="animate-pulse bg-gray-200 rounded-xl h-96"></div>
-            ))}
-          </div>
-        ) : (
+        {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {displayProjects.map((project) => (
               <div
@@ -64,7 +88,9 @@ const PortfolioSection = () => {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">
                       <span className="text-sm bg-primary-100 text-primary-700 px-3 py-1 rounded-full">
-                        {project.completed ? t("portfolio.completed") : t("portfolio.ongoing")}
+                        {project.completed
+                          ? t("portfolio.completed")
+                          : t("portfolio.ongoing")}
                       </span>
                     </div>
                     <Link
@@ -79,13 +105,13 @@ const PortfolioSection = () => {
               </div>
             ))}
           </div>
-        )}
+        }
 
         {/* View More Button */}
         <div className="text-center mt-10">
           <Link
             href="/portfolio"
-            className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-8 rounded-lg transition-colors"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition-colors"
           >
             {t("portfolio.viewAllProjects")}
           </Link>

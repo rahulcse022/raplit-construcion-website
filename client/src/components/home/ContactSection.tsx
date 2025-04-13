@@ -18,7 +18,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Facebook,
+  Instagram,
+  Twitter,
+  Youtube,
+} from "lucide-react";
 
 // Define schema for the contact form
 const contactFormSchema = z.object({
@@ -28,9 +37,13 @@ const contactFormSchema = z.object({
   phoneNumber: z.string().min(10, {
     message: "Phone number must be at least 10 characters.",
   }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }).optional().or(z.literal("")),
+  email: z
+    .string()
+    .email({
+      message: "Please enter a valid email address.",
+    })
+    .optional()
+    .or(z.literal("")),
   location: z.string().optional().or(z.literal("")),
   requirements: z.string().optional().or(z.literal("")),
   marketingConsent: z.boolean().default(false).optional(),
@@ -41,7 +54,7 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 const ContactSection = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
-  
+
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -103,7 +116,10 @@ const ContactSection = () => {
               </h2>
 
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-4"
+                >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
@@ -196,12 +212,10 @@ const ContactSection = () => {
                     )}
                   />
 
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    disabled={isPending}
-                  >
-                    {isPending ? t("contact.form.submitting") : t("contact.form.submitInquiry")}
+                  <Button type="submit" className="w-full" disabled={isPending}>
+                    {isPending
+                      ? t("contact.form.submitting")
+                      : t("contact.form.submitInquiry")}
                   </Button>
                 </form>
               </Form>
@@ -209,14 +223,14 @@ const ContactSection = () => {
 
             {/* Contact Information */}
             <div>
-              <div className="bg-primary-700 text-white rounded-xl p-6 md:p-8 mb-8">
+              <div className="bg-blue-700 text-white rounded-xl p-6 md:p-8 mb-8">
                 <h2 className="font-heading font-semibold text-2xl mb-6">
                   {t("contact.contactInformation")}
                 </h2>
 
                 <div className="space-y-4">
                   <div className="flex items-start">
-                    <div className="bg-primary-600 rounded-full p-2 mr-4 mt-1">
+                    <div className="bg-blue-600 rounded-full p-2 mr-4 mt-1">
                       <MapPin className="h-4 w-4" />
                     </div>
                     <div>
@@ -230,7 +244,7 @@ const ContactSection = () => {
                   </div>
 
                   <div className="flex items-start">
-                    <div className="bg-primary-600 rounded-full p-2 mr-4 mt-1">
+                    <div className="bg-blue-600 rounded-full p-2 mr-4 mt-1">
                       <Phone className="h-4 w-4" />
                     </div>
                     <div>
@@ -242,7 +256,7 @@ const ContactSection = () => {
                   </div>
 
                   <div className="flex items-start">
-                    <div className="bg-primary-600 rounded-full p-2 mr-4 mt-1">
+                    <div className="bg-blue-600 rounded-full p-2 mr-4 mt-1">
                       <Mail className="h-4 w-4" />
                     </div>
                     <div>
@@ -254,7 +268,7 @@ const ContactSection = () => {
                   </div>
 
                   <div className="flex items-start">
-                    <div className="bg-primary-600 rounded-full p-2 mr-4 mt-1">
+                    <div className="bg-blue-600 rounded-full p-2 mr-4 mt-1">
                       <Clock className="h-4 w-4" />
                     </div>
                     <div>
@@ -277,7 +291,7 @@ const ContactSection = () => {
                       <a
                         key={index}
                         href={link.href}
-                        className="bg-primary-600 hover:bg-primary-500 h-10 w-10 rounded-full flex items-center justify-center transition-colors"
+                        className="bg-blue-600 hover:bg-blue-500 h-10 w-10 rounded-full flex items-center justify-center transition-colors"
                         aria-label="Social media"
                       >
                         {link.icon}
@@ -289,10 +303,10 @@ const ContactSection = () => {
 
               {/* Interactive Map */}
               <div className="bg-white rounded-xl overflow-hidden shadow-md h-[320px]">
-                <iframe 
+                <iframe
                   src={`https://maps.google.com/maps?q=26.988300,75.860001&z=15&output=embed`}
-                  className="w-full h-full border-0" 
-                  title={t("contact.officeAddress")} 
+                  className="w-full h-full border-0"
+                  title={t("contact.officeAddress")}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

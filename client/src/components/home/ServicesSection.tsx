@@ -39,10 +39,10 @@ const ServicesSection = () => {
               key={index}
               className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group"
             >
-              <div className="bg-primary-600 rounded-2xl w-16 h-16 flex items-center justify-center mb-6 group-hover:bg-yellow-500 transition-colors">
+              <div className="rounded-2xl w-16 h-16 flex items-center justify-center mb-6 group-hover:bg-yellow-500 transition-colors">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 text-white"
+                  className="h-8 w-8 text-black"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -73,15 +73,32 @@ const ServicesSection = () => {
                   )}
                 </svg>
               </div>
+
               <h3 className="font-heading font-bold text-2xl mb-4 text-gray-900 group-hover:text-primary-600 transition-colors">
                 {service.title}
               </h3>
-              <p className="text-gray-700 text-lg leading-relaxed">{service.description}</p>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                {service.description}
+              </p>
               <div className="mt-6 pt-6 border-t border-gray-100">
-                <a href="#" className="inline-flex items-center text-primary-600 font-medium group-hover:text-yellow-500 transition-colors">
+                <a
+                  href="#"
+                  className="inline-flex items-center text-primary-600 font-medium group-hover:text-yellow-500 transition-colors"
+                >
                   Learn more
-                  <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  <svg
+                    className="ml-2 w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
                   </svg>
                 </a>
               </div>

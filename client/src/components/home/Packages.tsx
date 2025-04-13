@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useLanguage } from "@/context/LanguageContext";
 import { useQuery } from "@tanstack/react-query";
@@ -10,12 +9,15 @@ const Packages = () => {
   const { t } = useLanguage();
   const { savedPlans, savePlan } = useSavedPlans();
 
+  const dummyImage =
+    "https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&h=600&q=80";
+
   // We only show 3 packages in the home page
   const packagesData = [
     {
       id: 1,
       name: "Package 1",
-      imageUrl: "/images/package1.jpg",
+      imageUrl: dummyImage,
       size: 1000,
       bedrooms: 2,
       bathrooms: 2,
@@ -28,7 +30,7 @@ const Packages = () => {
     {
       id: 2,
       name: "Package 2",
-      imageUrl: "/images/package2.jpg",
+      imageUrl: dummyImage,
       size: 1500,
       bedrooms: 3,
       bathrooms: 2,
@@ -41,7 +43,7 @@ const Packages = () => {
     {
       id: 3,
       name: "Package 3",
-      imageUrl: "/images/package3.jpg",
+      imageUrl: dummyImage,
       size: 2000,
       bedrooms: 4,
       bathrooms: 3,
@@ -53,14 +55,13 @@ const Packages = () => {
     },
   ];
 
-
   const getPackages = () => {
     return packagesData;
   };
 
   const { data: packages, isLoading } = useQuery<Package[]>({
-    queryKey: ['packages'],
-    queryFn: () => getPackages()
+    queryKey: ["packages"],
+    queryFn: () => getPackages(),
   });
 
   const displayPackages = packages?.slice(0, 3) || [];
@@ -68,12 +69,12 @@ const Packages = () => {
   const handleSave = (packageData: Package) => {
     savePlan({
       packageId: packageData.id,
-      customPackage: null
+      customPackage: null,
     });
   };
 
   const isPackageSaved = (id: number) => {
-    return savedPlans.some(plan => plan.packageId === id);
+    return savedPlans.some((plan) => plan.packageId === id);
   };
 
   return (
@@ -90,8 +91,11 @@ const Packages = () => {
 
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="animate-pulse bg-gray-200 rounded-2xl h-96"></div>
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="animate-pulse bg-gray-200 rounded-2xl h-96"
+              ></div>
             ))}
           </div>
         ) : (
@@ -115,14 +119,18 @@ const Packages = () => {
                           ? "bg-red-500 text-white"
                           : "bg-white text-gray-700 hover:bg-gray-100"
                       } h-10 w-10 rounded-full shadow-lg flex items-center justify-center transition-all duration-300`}
-                      aria-label={isPackageSaved(pkg.id) ? "Remove from saved" : "Save package"}
+                      aria-label={
+                        isPackageSaved(pkg.id)
+                          ? "Remove from saved"
+                          : "Save package"
+                      }
                     >
-                      <Heart 
+                      <Heart
                         className={`h-5 w-5 transition-all duration-300 ${
-                          isPackageSaved(pkg.id) 
-                            ? "fill-white text-white" 
+                          isPackageSaved(pkg.id)
+                            ? "fill-white text-white"
                             : "hover:text-red-500"
-                        }`} 
+                        }`}
                       />
                     </button>
                   </div>
@@ -162,7 +170,10 @@ const Packages = () => {
                           clipRule="evenodd"
                         />
                       </svg>
-                      <span className="font-semibold mr-1 text-gray-700">{t("packages.size")}:</span> {pkg.size} sq.ft
+                      <span className="font-semibold mr-1 text-gray-700">
+                        {t("packages.size")}:
+                      </span>{" "}
+                      {pkg.size} sq.ft
                     </span>
                     <span className="inline-flex items-center mr-4 mb-2">
                       <svg
@@ -178,7 +189,10 @@ const Packages = () => {
                           clipRule="evenodd"
                         />
                       </svg>
-                      <span className="font-semibold mr-1 text-gray-700">{t("packages.bedrooms")}:</span> {pkg.bedrooms}
+                      <span className="font-semibold mr-1 text-gray-700">
+                        {t("packages.bedrooms")}:
+                      </span>{" "}
+                      {pkg.bedrooms}
                     </span>
                     <span className="inline-flex items-center mb-2">
                       <svg
@@ -193,7 +207,10 @@ const Packages = () => {
                           clipRule="evenodd"
                         />
                       </svg>
-                      <span className="font-semibold mr-1 text-gray-700">{t("packages.bathrooms")}:</span> {pkg.bathrooms}
+                      <span className="font-semibold mr-1 text-gray-700">
+                        {t("packages.bathrooms")}:
+                      </span>{" "}
+                      {pkg.bathrooms}
                     </span>
                   </div>
 
@@ -220,7 +237,7 @@ const Packages = () => {
                     </Link>
                     <Link
                       href={`/custom-builder?packageId=${pkg.id}`}
-                      className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition-colors text-center shadow-md hover:shadow-lg block w-full"
+                      className="bg-[#0F55BD] hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition-colors text-center shadow-md hover:shadow-lg block w-full"
                     >
                       {t("packages.customize")}
                     </Link>
